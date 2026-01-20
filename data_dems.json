@@ -1,0 +1,117 @@
+{
+  "1": {
+    "count": 7,
+    "photos": [
+      "Chris_Pappas",
+      "Debbie_Wasserman_Schultz",
+      "Jeanne_Shaheen",
+      "John_Hickenlooper",
+      "Kirsten_Gillibrand",
+      "Ron_Wyden",
+      "Tammy_Baldwin"
+    ]
+  },
+  "2": {
+    "count": 15,
+    "photos": [
+      "Brian_Schatz",
+      "Catherine_Cortez_Masto",
+      "Cory_Booker",
+      "Debbie_Stabenow",
+      "Don_Davis",
+      "Grace_Meng",
+      "Hakeem_Jeffries",
+      "Jared_Golden",
+      "Josh_Gottheimer",
+      "Kamala_Harris",
+      "Maggie_Hassan",
+      "Mark_Warner",
+      "Martin_Heinrich",
+      "Sherrod_Brown",
+      "Tom_Udall"
+    ]
+  },
+  "3": {
+    "count": 21,
+    "photos": [
+      "Adam_Gray",
+      "Amy_Klobuchar",
+      "Angela_Alsobrooks",
+      "Ben_Cardin",
+      "Brad_Schneider",
+      "Dianne_Feinstein",
+      "Dick_Durbin",
+      "Doug_Jones",
+      "Eric_Adams",
+      "Gary_Peters",
+      "Glenn_Ivey",
+      "Heidi_Heitkamp",
+      "Henry_Cuellar",
+      "Jacky_Rosen",
+      "Jon_Ossoff",
+      "Patty_Murray",
+      "Pete_Aguilar",
+      "Ritchie_Torres",
+      "Sheldon_Whitehouse",
+      "Ted_Deutch",
+      "Tom_Carper"
+    ]
+  },
+  "4": {
+    "count": 8,
+    "photos": [
+      "Andy_Kim",
+      "Elissa_Slotkin",
+      "Gregory_Meeks",
+      "Haley_Stevens",
+      "Jeff_Merkley",
+      "Laura_Gillen",
+      "Lois_Frankel",
+      "Wesley_Bell"
+    ]
+  },
+  "5": {
+    "count": 3,
+    "photos": [
+      "John_Fetterman",
+      "Patrick_Leahy",
+      "Steny_Hoyer"
+    ]
+  },
+  "6": {
+    "count": 8,
+    "photos": [
+      "Bill_Nelson",
+      "Jake_Auchincloss",
+      "Joe_Donnelly",
+      "Joe_Manchin",
+      "Kyrsten_Sinema",
+      "Maria_Cantwell",
+      "Tim_Kaine",
+      "Vicente_Gonzalez"
+    ]
+  },
+  "7": {
+    "count": 2,
+    "photos": [
+      "Marie_Gluesenkamp_Perez",
+      "Valerie_Foushee"
+    ]
+  },
+  "8": {
+    "count": 11,
+    "photos": [
+      "Angus_King",
+      "Bob_Casey",
+      "Chris_Coons",
+      "Chuck_Schumer",
+      "Claire_McCaskill",
+      "Jon_Tester",
+      "Katherine_Clark",
+      "Mark_Kelly",
+      "Michael_Bennet",
+      "Rahm_Emanuel",
+      "Raphael_Warnock"
+    ]
+  }
+}
