@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Political Figures - Facial Categories Database v2.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .database-selector {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .db-button {
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+            color: #495057;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .db-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .db-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 20px 40px;
+            background: #f1f3f5;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            background: white;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .tab:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+        
+        .tab.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .category-section {
+            display: none;
+        }
+        
+        .category-section.active {
+            display: block;
+        }
+        
+        .category-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .category-header h2 {
+            font-size: 2em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .category-header p {
+            font-size: 1.1em;
+            color: #7f8c8d;
+        }
+        
+        .average-face {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .average-face h3 {
+            font-size: 1.5em;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+        
+        .average-face img {
+            max-width: 400px;
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .photo-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .photo-card .name {
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 0.95em;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 60px;
+            font-size: 1.2em;
+            color: #7f8c8d;
+        }
+        
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Political Figures Database v2.0</h1>
+            <p>Facial Categories Analysis - Defected Democrats & Right-Wing Individuals</p>
+        </header>
+        
+        <div class="database-selector">
+            <button class="db-button active" onclick="switchDatabase('dems')">
+                Defected Democrats (75)
+            </button>
+            <button class="db-button" onclick="switchDatabase('rightwing')">
+                Right-Wing Database (1,298)
+            </button>
+        </div>
+        
+        <div class="tabs" id="tabs"></div>
+        
+        <div class="content" id="content">
+            <div class="loading">Loading gallery data...</div>
+        </div>
+        
+        <footer>
+            <p>Political Figures Facial Categories Database v2.0</p>
+            <p style="margin-top: 10px; opacity: 0.8; font-size: 0.9em;">
+                Categorized using facial analysis (features, ratios, proportions)
+            </p>
+        </footer>
+    </div>
+    
+    <script>
+        let currentDatabase = 'dems';
+        let currentCategory = 1;
+        let databaseData = {
+            dems: {
+                name: 'Defected Democrats',
+                categories: 8,
+                data: null
+            },
+            rightwing: {
+                name: 'Right-Wing Database',
+                categories: 8,
+                data: null
+            }
+        };
+        
+        function switchDatabase(db) {
+            currentDatabase = db;
+            currentCategory = 1;
+            
+            // Update button states
+            document.querySelectorAll('.db-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Load database
+            loadDatabase(db);
+        }
+        
+        function loadDatabase(db) {
+            const dbInfo = databaseData[db];
+            
+            // Create tabs
+            const tabsHtml = Array.from({length: dbInfo.categories}, (_, i) => {
+                const num = i + 1;
+                const active = num === 1 ? 'active' : '';
+                return `<div class="tab ${active}" onclick="switchCategory(${num})">Category ${num}</div>`;
+            }).join('');
+            
+            document.getElementById('tabs').innerHTML = tabsHtml;
+            
+            // Load category data
+            fetch(`data_${db}.json`)
+                .then(r => r.json())
+                .then(data => {
+                    databaseData[db].data = data;
+                    showCategory(1);
+                })
+                .catch(err => {
+                    document.getElementById('content').innerHTML = 
+                        `<div class="loading">Data files not found. Please ensure data_${db}.json exists.</div>`;
+                });
+        }
+        
+        function switchCategory(num) {
+            currentCategory = num;
+            
+            // Update tab states
+            document.querySelectorAll('.tab').forEach((tab, i) => {
+                tab.classList.toggle('active', i + 1 === num);
+            });
+            
+            showCategory(num);
+        }
+        
+        function showCategory(num) {
+            const data = databaseData[currentDatabase].data;
+            if (!data || !data[num]) {
+                document.getElementById('content').innerHTML = '<div class="loading">Loading...</div>';
+                return;
+            }
+            
+            const category = data[num];
+            const dbPath = currentDatabase;
+            
+            const html = `
+                <div class="category-section active">
+                    <div class="category-header">
+                        <h2>Category ${num}</h2>
+                        <p>${category.count} individuals</p>
+                    </div>
+                    
+                    <div class="average-face">
+                        <h3>Average Face Composite</h3>
+                        <img src="images/${dbPath}/average_${num}.jpg" alt="Average face for category ${num}" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <p style="display:none; color: #7f8c8d; margin-top: 20px;">Average face image not available</p>
+                    </div>
+                    
+                    <div class="photo-grid">
+                        ${category.photos.map(name => `
+                            <div class="photo-card">
+                                <img src="images/${dbPath}/category_${num}/${name}.jpg" 
+                                     alt="${name}" 
+                                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'200\\' height=\\'250\\'%3E%3Crect fill=\\'%23ddd\\' width=\\'200\\' height=\\'250\\'/%3E%3Ctext x=\\'50%25\\' y=\\'50%25\\' text-anchor=\\'middle\\' fill=\\'%23999\\' font-size=\\'14\\'%3EImage not found%3C/text%3E%3C/svg%3E'">
+                                <div class="name">${name.replace(/_/g, ' ')}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('content').innerHTML = html;
+        }
+        
+        // Initialize
+        loadDatabase('dems');
+    </script>
+</body>
+</html>
